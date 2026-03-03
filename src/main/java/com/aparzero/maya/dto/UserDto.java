@@ -13,7 +13,7 @@ public class UserDto {
     private int id;
     private String name;
     private BigDecimal balance;
-    private List<FriendDto> friendList;
+
 
     public static UserDto convert(User user){
 
@@ -23,7 +23,6 @@ public class UserDto {
                 .id(user.getUserId())
                 .name(user.getName())
                 .balance(user.getBalance())
-                .friendList(friendDtoList)
                 .build();
     }
 }

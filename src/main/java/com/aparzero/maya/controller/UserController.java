@@ -21,4 +21,9 @@ public class UserController {
       log.info("Fetching User Info: {}",userId);
       return userService.getUserInfo(userId);
     }
+    @GetMapping("/friends")
+    public ResponseEntity<ResponseObj> getUserFriendList(@RequestHeader("X-User-Id") int userId){
+        log.info("Fetching User FriendList: {}",userId);
+        return userService.getUserFriendsList(userId);
+    }
 }

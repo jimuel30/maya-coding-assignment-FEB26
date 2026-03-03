@@ -1,6 +1,7 @@
 package com.aparzero.maya.service;
 
 
+import com.aparzero.maya.dto.FriendDto;
 import com.aparzero.maya.exception.NotFoundException;
 import com.aparzero.maya.domain.ResponseObj;
 import com.aparzero.maya.dto.UserDto;
@@ -22,6 +23,11 @@ public class UserService {
         User user = validateUserId(userId);
         log.info("User Exists: {}",userId);
         return ResponseObj.success(UserDto.convert(user));
+    }
+
+    public ResponseEntity<ResponseObj> getUserFriendsList(int userId){
+        User user = validateUserId(userId);
+        return ResponseObj.success(FriendDto.batchConvert(user.getFriendsList()));
     }
 
     public User validateUserId(int userId){
