@@ -41,14 +41,17 @@ public class TransactionService {
 
 
         ResponseEntity<ResponseObj> response = null;
-
-        if(userService.validateFriend(sender,receiver)){
-            log.info("Recipient Is a friend");
-            response = validateTransaction(sender,receiver,request);
-        }
-        else{
-            log.info("No User Found Using The Ids: {} {}",senderId,request.getRecipientId());
-            response = ResponseObj.failed("Invalid Recipient", HttpStatus.BAD_REQUEST.value());
+        if (request.getAmount() == null || request.getAmount().compareTo(BigDecimal.ZERO) == 0) {
+            response = ResponseObj.failed("Invalid Amount",HttpStatus.BAD_REQUEST.value());
+        }else{
+            if(userService.validateFriend(sender,receiver)){
+                log.info("Recipient Is a friend");
+                response = validateTransaction(sender,receiver,request);
+            }
+            else{
+                log.info("No User Found Using The Ids: {} {}",senderId,request.getRecipientId());
+                response = ResponseObj.failed("Invalid Recipient", HttpStatus.BAD_REQUEST.value());
+            }
         }
         return response;
     }
