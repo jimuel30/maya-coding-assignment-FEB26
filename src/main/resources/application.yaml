@@ -1,3 +1,20 @@
 spring:
   application:
     name: maya
+  jpa:
+    hibernate:
+      ddl-auto: update
+
+
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5436/maya
+    username: maya
+    password: maya
+
+
+third-party:
+  json-place-holder:
+    url:
+      users: 'https://jsonplaceholder.typicode.com/users'

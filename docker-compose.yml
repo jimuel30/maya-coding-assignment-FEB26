@@ -1,0 +1,11 @@
+version: "3.4"
+services:
+  etrading-test-postgres:
+    image: postgres:12.10
+    container_name: maya-postgres
+    ports:
+      - '5436:5432'
+    environment:
+      POSTGRES_USER: maya
+      POSTGRES_PASSWORD: maya
+      POSTGRES_DB: maya
