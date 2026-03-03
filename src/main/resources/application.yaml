@@ -1,20 +1,25 @@
 spring:
   application:
-    name: maya
+    name: ${SPRING_APPLICATION_NAME:maya}
   jpa:
     hibernate:
-      ddl-auto: update
-
-
+      ddl-auto: ${SPRING_JPA_HIBERNATE_DDL_AUTO:update}
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
     driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://localhost:5436/maya
-    username: maya
-    password: maya
+    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:5436/maya}
+    username: ${SPRING_DATASOURCE_USERNAME:maya}
+    password: ${SPRING_DATASOURCE_PASSWORD:maya}
 
+users:
+  transaction-limit: ${USERS_TRANSACTION_LIMIT:1000}
 
 third-party:
   json-place-holder:
     url:
-      users: 'https://jsonplaceholder.typicode.com/users'
+      users: ${JSON_PLACEHOLDER_URL_USERS:https://jsonplaceholder.typicode.com/users}
+
+
+scheduler:
+  daily-sync:
+    cron: ${DAILY_SYNC_CRON:0 */3 * * * ?} # default: every 3 minutes
