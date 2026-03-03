@@ -1,4 +1,5 @@
 version: "3.4"
+
 services:
   etrading-test-postgres:
     image: postgres:12.10
@@ -9,3 +10,23 @@ services:
       POSTGRES_USER: maya
       POSTGRES_PASSWORD: maya
       POSTGRES_DB: maya
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  maya-app:
+    build: .
+    container_name: maya-app
+    ports:
+      - "8080:8080"
+    depends_on:
+      - etrading-test-postgres
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://etrading-test-postgres:5432/maya
+      SPRING_DATASOURCE_USERNAME: maya
+      SPRING_DATASOURCE_PASSWORD: maya
+      USERS_TRANSACTION_LIMIT: 5000
+      JSON_PLACEHOLDER_URL_USERS: https://jsonplaceholder.typicode.com/users
+      DAILY_SYNC_CRON: "0 */3 * * * ?" # runs every 3 minutes
+
+volumes:
+  pgdata:

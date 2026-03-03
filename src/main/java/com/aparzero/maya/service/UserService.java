@@ -35,4 +35,11 @@ public class UserService {
                 .orElseThrow(() -> new NotFoundException("User Not Found"));
     }
 
+    public boolean validateFriend(User user, User friend){
+        if (user.getFriendsList() == null || user.getFriendsList().isEmpty()) {
+            return false;
+        }
+        return user.getFriendsList().contains(friend);
+    }
+
 }

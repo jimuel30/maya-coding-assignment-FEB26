@@ -23,5 +23,6 @@ public class User {
             inverseJoinColumns = @JoinColumn(name = "friend_id")
     )
     private List<User> friendsList;
+    private BigDecimal transactionLimit;
 
 }

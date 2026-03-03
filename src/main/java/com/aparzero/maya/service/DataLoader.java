@@ -7,6 +7,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
+
+import java.math.BigDecimal;
 import java.util.*;
 
 
@@ -25,6 +27,7 @@ public class DataLoader implements CommandLineRunner {
            userList = jsonPlaceholderService.getUsers();
             for (User user:userList) {
                 user.setBalance(ComputationUtil.randomMultipleOf100UpTo2000());
+                user.setTransactionLimit(new BigDecimal(1000));
                 user = userRepository.save(user);
                 log.info("SAVED USER: {}",user);
                 existingUsers.add(user);
